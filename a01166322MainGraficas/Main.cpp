@@ -12,7 +12,7 @@ using namespace std;
 
 
 int PerimetroRectangulo(int base, int altura) {
-	int p = (base + altura) * 2;
+	int p = 2 * base + 2 * altura;
 	return p;
 }
 
@@ -82,27 +82,56 @@ void FlechaEstrellas(int n) {
 			}
 			cout << endl;
 		}
-
-
-		int main() {
-			int PerimetroRectangulo(int base, int altura);
-
-			float AreaTriangulo(float base, float altura);
-
-			int Mayor(int numero1, int numero2, int numero3);
-
-			int Menor(int numero1, int numero2, int numero3);
-
-			void FilaEstrellas(int n);
-
-			void MatrizEstrellas(int n);
-
-			void PiramideEstrellas(int n);
-
-			void FlechaEstrellas(int n);
-
-			void Fibonacci(int n);
-
-			bool EsPrimo(int numero);
-
 	}
+}
+
+
+void Fibonachi(int n)
+{
+	if (n <= 0) return;
+	int i = 1;
+	if (n >= i)
+		std::cout << i << " ";
+	
+	int j = 1;
+	if (n >= 2)
+		std::cout << j << " ";
+
+	for (int k = 2; k < n; k++);
+	{
+		int temp = i + j; 
+		i = j;
+		j = temp;
+		std::cout << temp << endl;
+
+}
+
+
+bool EsPrimo(int numero)
+{
+	if (numero <= 0)
+		return false;
+
+	for (int i = 2; i < numero; i++)
+	{
+		if (numero % i == 0) return false;
+	}
+
+	return true;
+
+}
+
+int main() 
+{
+	Fibonachi(5)
+
+	std::cout << "Fuck tha police" << std::endl;
+	int perimetro = PerimetroRectangulo(5, 3);
+	std::cout << perimetro << std::endl;
+	std::cin.get();
+
+	
+
+
+	return 0;
+}
