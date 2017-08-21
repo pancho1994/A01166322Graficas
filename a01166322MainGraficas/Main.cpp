@@ -8,6 +8,8 @@ Autor: A01166322 Francisco Vil lafranca
 
 #include <iostream>
 #include "Circle.h"
+#include "Rectangle.h"
+#include "Employee.h"
 
 using namespace std;
 
