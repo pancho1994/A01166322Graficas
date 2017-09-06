@@ -10,6 +10,7 @@ Autor: A01166322 Francisco Villafranca
 #include <glm/glm.hpp>
 #include <vector>
 
+//lalalala batman
 //Identificador del manager de VBO para un conjunto de vertices.
 GLuint vao;
 
