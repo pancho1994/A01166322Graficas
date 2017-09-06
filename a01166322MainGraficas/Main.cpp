@@ -6,6 +6,12 @@ Autor: A01166322 Francisco Vil lafranca
 
 ************************************************/
 
+/************************************************
+Materia: Graficas Computacionales
+Fecha: 23 de Agosto del 2017
+Autor: A01166322 Francisco Vil lafranca
+************************************************/
+
 #include <iostream>
 #include <GL/glew.h>
 #include <GL/freeglut.h>
@@ -16,7 +22,7 @@ Autor: A01166322 Francisco Vil lafranca
 
 int main(int argc, char* argv[])
 {
-	
+
 	std::string filename = "Prueba.txt";
 	InputFile myFile;
 	myFile.Read(filename);
