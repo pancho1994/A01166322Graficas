@@ -9,23 +9,83 @@ Autor: A01166322 Francisco Vil lafranca
 #include <iostream>
 #include <GL/glew.h>
 #include <GL/freeglut.h>
+#include <glm/glm.hpp>
+#include <vector>
+
+//Identificador del manager de VBO para un conjunto de vertices.
+GLuint vao;
+
+void Initialize()
+{
+	//vamos a crear una lista que almacena posiciones en 2 dimensiones de un triangulo.
+	//esto es en CPU y RAM.
+	std::vector<glm::vec2> positions;
+	positions.push_back(glm::vec2(-1.0f, -1.0f));
+	positions.push_back(glm::vec2(1.0f, -1.0f));
+	positions.push_back(glm::vec2(0.0f, 1.0f));
+
+	//vamos a crear una lista para almacenar colores RGB
+	//Esta lista esta en CPu y RAM
+	std::vector<glm::vec3> colors;
+	colors.push_back(glm::vec3(1.0f, 0.0f, 0.0f));
+	colors.push_back(glm::vec3(0.0f, 1.0f, 0.0f));
+	colors.push_back(glm::vec3(0.0f, 0.0f, 1.0f));
+
+	//Creamos un vertex array object y almacenamos el id en la variable vao.
+	//-este es el manager.
+	glGenVertexArrays(1, &vao);
+	//le decimos a opengl que queremos utilizar el manager;
+	//Todos los VBOs que creemos a partir de este punto y hasta que desactivemos este VAO, se van a asociar a este manager.
+	glBindVertexArray(vao);
+
+	//identificador del VBO de posiciones. Aqui lo vamos a almacenar.
+	GLuint positionsVBO;
+	//creamos un VBO y almacenamos el identificador en la variable positionsVBO.
+	glGenBuffers(1, &positionsVBO);
+	//Le decimos a opengl que lo queremos utilizar como un atributo.
+	glBindBuffer(GL_ARRAY_BUFFER, positionsVBO);
+	//Asignamos los datos al buffer y los mandamos a la tarjeta de video.
+	glBufferData(GL_ARRAY_BUFFER, sizeof(glm::vec2) * positions.size(), positions.data(), GL_STATIC_DRAW);
+	//Quiero activar el atributo con indice 0 en la tarjeta de video
+	glEnableVertexAttribArray(0);
+	//configuramos el atributo con indice 0 en la tarjeta de video.
+	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, nullptr);
+	//En este momento desactivamos el uso del VBO de posiciones.
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+	GLuint colorsVBO;
+	glGenBuffers(1, &colorsVBO);
+	glBindBuffer(GL_ARRAY_BUFFER, colorsVBO);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(glm::vec3) * colors.size(), colors.data(), GL_STATIC_DRAW);
+	glEnableVertexAttribArray(1);
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, nullptr);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+	//ya no quiero utilizar el vao. ya no se asociaran mas VBOs a este VAO.
+	glBindVertexArray(0);
+}
 
 void MainLoop()
 {
-	//borramos el buffer de color y profundidad siempre al inicio de un nuevo frame
+	//Borramos el buffer de color y profundidad siempre al inicio de un nuevo frame
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	//WARNING ESTO ES OPENGL CLASICO Y NO LO VAMOS A VOLVER A USAR JAMAS
-	glBegin(GL_TRIANGLES);
-	glColor3f(1.0f, 0.0f, 0.0f);
-	glVertex2f(-1.0f, -1.0f);
-	glColor3f(0.0f, 1.0f, 0.0f);
-	glVertex2f(1.0f, -1.0f);
-	glColor3f(0.0f, 0.0f, 1.0f);
-	glVertex2f(0.0f, 1.0f);
-	glEnd();
-	//FIN DEL WARNING
+	//paso 1 no lo podemos hacer aun
 
+
+	//paso 2 activar un VAO 
+	glBindVertexArray(vao);
+
+	//paso 3 dibujamos
+	glDrawArrays(GL_TRIANGLES, 0, 3);
+	
+	//paso 4 desactivamos el VAO
+	glBindVertexArray(0);
+	
+	//paso 5 aun no lo podemos hacer
+
+	
+	
 	glutSwapBuffers();
 	
 }
@@ -41,8 +101,8 @@ int main(int argc, char* argv[])
 	//Freeglut se encarga de generar y manejar ventanas.
 	//Utilizamos Freeglut para crear una ventana donde vamos a dibujar
 	glutInit(&argc, argv);
-	//Tenemos que informar que queremos trabajar con el pipeline clasico y eso es OpenGL viejito
-	glutInitContextProfile(GLUT_COMPATIBILITY_PROFILE);
+	//Tenemos que informar que queremos trabajar con el pipeline moderno programable
+	glutInitContextProfile(GLUT_CORE_PROFILE);
 	//Freeglut nos permite configurar eventos que ocurren en la ventana.
 	//Un evento que nos interesa es cuando alguien cierra la ventana.
 	//En este caso, simplemente dejamos de renderear y terminamos el programa.
@@ -63,6 +123,10 @@ int main(int argc, char* argv[])
 	glewInit();
 	//Configurar OpenGL. Este es el color por default del buffer color
 	glClearColor(1.0f, 1.0f, 0.5f, 1.0f);
+
+	//configurar la memoria que la aplicacion va a necesitar.
+	Initialize();
+
 	//Iniciamos la aplicacion grafica. el main se pausara en esta linea
 	//
 	//
