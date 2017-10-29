@@ -41,7 +41,7 @@ void PrintTransform(Transform& t)
 }
 
 
-void initialize() 
+int main() 
 {
 	rotation.SetRotation(45, 90, 30);
 	PrintTransform(rotation);
@@ -60,7 +60,3 @@ void initialize()
 
 }
 
-int main() {
-	
-	return 0;
-}
