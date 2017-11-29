@@ -1,7 +1,8 @@
 /************************************************
 Materia: Graficas Computacionales
-Fecha: 29 de Octubre del 2017
-Autor: A01166322 Francisco Villafranca
+Fecha: 28 de Noviembre del 2017
+Autor: A01166322 Francisco Villafranca  :)
+A01374365 Edgar Saul Ortiz Borja :)
 ************************************************/
 
 #include <GL/glew.h>
@@ -192,7 +193,7 @@ void Initialize()
 	_mesh.SetNormalAttribute(normals, GL_STATIC_DRAW, 2);
 	_mesh.SetTexCoordAttribute(textures, GL_STATIC_DRAW, 3);
 	_mesh.SetIndices(indices, GL_STATIC_DRAW);
-	
+
 
 	_shaderProgram.CreateProgram();
 	_shaderProgram.AttachShader("Textured.vert", GL_VERTEX_SHADER);
@@ -202,21 +203,21 @@ void Initialize()
 	_shaderProgram.SetAttribute(2, "VertexNormal");
 	_shaderProgram.SetAttribute(3, "VertexTexCoord");
 	_shaderProgram.LinkProgram();
-	
-	
+
+
 	_transform.SetPosition(0.0f, -5.0f, -20.0f); //base
 	_transform2.SetPosition(0.0f, -6.0f, -20.0f); //piso
-	_c1.SetPosition(-3.0f,0.0f,0.0f);
-	_c2.SetPosition(0.0f,0.0f,-3.0f);
-	_c3.SetPosition(0.0f,0.0f, 3.0f); 
-	_c4.SetPosition(3.0f,0.0f, 0.0f);
+	_c1.SetPosition(-3.0f, 0.0f, 0.0f);
+	_c2.SetPosition(0.0f, 0.0f, -3.0f);
+	_c3.SetPosition(0.0f, 0.0f, 3.0f);
+	_c4.SetPosition(3.0f, 0.0f, 0.0f);
 	_c5.SetPosition(3.0f, 0.0f, 0.0f);
 	_jc1.SetPosition(-3.0f, 0.0f, 0.0f);
 	_jc2.SetPosition(0.0f, 0.0f, -3.0f);
 	_jc3.SetPosition(0.0f, 0.0f, 3.0f);
 	_jc4.SetPosition(3.0f, 0.0f, 0.0f);
 	_jc5.SetPosition(3.0f, 0.0f, 0.0f);
-	
+
 
 
 
@@ -226,20 +227,20 @@ void Initialize()
 
 void MainLoop()
 {
-	                                                                                                    // Animacion //
+	// Animacion //
 	delta += 0.002f;
 
 	if (rotacion <= 90.0f) {
 		rotacion = rotacion + delta;
 	}
-	if (rotacion >= 90.0f){
+	if (rotacion >= 90.0f) {
 		delta = delta * -1.0f;
 		rotacion = rotacion + delta;
 	}
-	//_transform.Rotate(0.06f, 0.08f, 0.02f, true);
+	_transform.Rotate(0.00f, 0.05f, 0.00f, true);
 
-	_transform.SetRotation(0.0f, -40.0f, 0.0f);
-	
+
+
 	_jc1.SetRotation(0.0f, 0.0f, -rotacion);
 	_jc2.SetRotation(rotacion, 0.0f, 0.0f);
 	_jc3.SetRotation(-rotacion, 0.0f, 0.0f);
@@ -249,8 +250,8 @@ void MainLoop()
 
 	// Borramos el buffer de color y profundidad siempre al inicio de un nuevo frame.
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	
-	
+
+
 
 
 
@@ -275,7 +276,7 @@ void MainLoop()
 	_cubeDetailTexture.Unbind();
 	glActiveTexture(GL_TEXTURE0);
 	_cubeBaseTexture.Unbind();
-	
+
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	_shaderProgram.Activate();
@@ -398,17 +399,15 @@ void MainLoop()
 	_shaderProgram.SetUniformf("LightPosition", glm::vec3(-5.0f, 5.0f, 5.0f));
 	_shaderProgram.SetUniformf("LightColor", glm::vec3(1.0f, 1.0f, 1.0f));
 	_shaderProgram.SetUniformf("CameraPosition", _camera.GetPosition());
-	_shaderProgram.SetUniformi("DiffuseTexture", 1);
+
 	_shaderProgram.SetUniformi("DiffuseTexture1", 0);
 
 	/////
 	glActiveTexture(GL_TEXTURE0);
 	_cubeBaseTexture.Bind();
-	glActiveTexture(GL_TEXTURE1);
-	_cubeDetailTexture.Bind();
+
 	_mesh.Draw(GL_TRIANGLES);
-	glActiveTexture(GL_TEXTURE1);
-	_cubeDetailTexture.Unbind();
+
 	glActiveTexture(GL_TEXTURE0);
 	_cubeBaseTexture.Unbind();
 	////
@@ -435,7 +434,7 @@ void ReshapeWindow(int width, int height)
 
 int main(int argc, char* argv[])
 {
-	
+
 	// Inicializamos freeglut. 
 	// Freeglut se encarga de generar y manejar ventanas.
 	// Utilizamos freeglut para crear una ventana donde vamos a dibujar.
