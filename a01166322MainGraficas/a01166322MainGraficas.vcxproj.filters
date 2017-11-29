@@ -42,6 +42,12 @@
     <ClCompile Include="Transform.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture2D.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="InputFile.h">
@@ -65,6 +71,12 @@
     <ClInclude Include="Transform.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture2D.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Prueba.txt">
@@ -76,6 +88,18 @@
       <Filter>Source Files\Shaders</Filter>
     </None>
     <None Include="Default.frag">
+      <Filter>Source Files\Shaders</Filter>
+    </None>
+    <None Include="Phong.frag">
+      <Filter>Source Files\Shaders</Filter>
+    </None>
+    <None Include="Phong.vert">
+      <Filter>Source Files\Shaders</Filter>
+    </None>
+    <None Include="Textured.frag">
+      <Filter>Source Files\Shaders</Filter>
+    </None>
+    <None Include="Textured.vert">
       <Filter>Source Files\Shaders</Filter>
     </None>
   </ItemGroup>
